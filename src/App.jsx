@@ -6,13 +6,13 @@ import ExpenseTable from "./component/ExpenseTable";
 import pencil from "./assets/pencil.svg";
 import { useEffect, useState } from "react";
 import expense from "./assets/expense.svg";
-import Chart from "./component/Chart";
-import PieChart from "./component/PieChart";
+
 
 function App() {
   const [budget, setBudget] = useState(10000);
   const [expenseAmount, setExpenseAmount] = useState([]);
   const [filteredExpenses, setFilteredExpenses] = useState(expenseAmount);
+  const [activeButton, setActiveButton] = useState("")
 
   const handleBudget = (newBudget) => {
     setBudget(newBudget);
@@ -49,19 +49,15 @@ function App() {
         handleExpenseAmount={handleExpenseAmount}
         expenses={expenseAmount}
         setFilteredExpenses={setFilteredExpenses}
+        activeButton={activeButton}
+        setActiveButton={setActiveButton}
       />
-       <div className="chart-container">
-        <div className="pie-chart">
-          <PieChart filteredExpenses={filteredExpenses} />
-        </div>
-        <div className="bar-graph">
-          <Chart filteredExpenses={filteredExpenses} />
-        </div>
-      </div>
+       
       <ExpenseTable
         expenseAmount={expenseAmount}
         filteredExpenses={filteredExpenses}
         setExpenseAmount={setExpenseAmount}
+        setActiveButton={setActiveButton}
       />
     </>
   );

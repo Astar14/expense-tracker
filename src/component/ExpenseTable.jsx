@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import AddExpense from "./AddExpense";
 import DeleteModal from "./DeleteModal";
 import PieChart from "./PieChart";
+import Chart from "./Chart";
 
-const ExpenseTable = ({ expenseAmount, setExpenseAmount , filteredExpenses}) => {
+const ExpenseTable = ({
+  expenseAmount,
+  setExpenseAmount,
+  filteredExpenses,
+  setActiveButton,
+}) => {
   const [deleteToggle, setDeleteToggle] = useState(false);
   const [updatedValue, setUpdatedValue] = useState(null);
   const [expenseToggle, setExpenseToggle] = useState(false);
 
-  console.log(expenseAmount)
+  console.log(expenseAmount);
 
   const handleEditing = (expense) => {
     setUpdatedValue(expense);
@@ -16,9 +22,9 @@ const ExpenseTable = ({ expenseAmount, setExpenseAmount , filteredExpenses}) => 
   };
 
   const handleDelete = (expense) => {
-    setUpdatedValue(expense)
-   setDeleteToggle(!deleteToggle)
- }
+    setUpdatedValue(expense);
+    setDeleteToggle(!deleteToggle);
+  };
 
   const handleExpenseAmount = (expense) => {
     if (updatedValue) {
@@ -31,18 +37,28 @@ const ExpenseTable = ({ expenseAmount, setExpenseAmount , filteredExpenses}) => 
     }
     setUpdatedValue(null);
     setExpenseToggle(false);
+    setActiveButton("")
   };
 
   const deleteItem = (id) => {
     const updatedItems = expenseAmount.filter((expense) => expense.id !== id);
     setExpenseAmount(updatedItems);
-    setDeleteToggle(false)
+    setActiveButton("");
+    setDeleteToggle(false);
   };
 
   return (
     <>
       {filteredExpenses?.length > 0 ? (
         <>
+          <div className="chart-container">
+            <div className="pie-chart">
+              <PieChart filteredExpenses={filteredExpenses} />
+            </div>
+            <div className="bar-graph">
+              <Chart filteredExpenses={filteredExpenses} />
+            </div>
+          </div>
           <div className="table-container">
             <table>
               <thead>
@@ -62,10 +78,13 @@ const ExpenseTable = ({ expenseAmount, setExpenseAmount , filteredExpenses}) => 
                     <td>{expense.category}</td>
                     <td>{expense.amount || 0}</td>
                     <td>
-                      <button className="edit" onClick={()=>handleEditing(expense)}>
+                      <button
+                        className="edit"
+                        onClick={() => handleEditing(expense)}
+                      >
                         Edit
                       </button>
-                      <button 
+                      <button
                         className="delete"
                         onClick={() => handleDelete(expense)}
                       >
@@ -83,14 +102,18 @@ const ExpenseTable = ({ expenseAmount, setExpenseAmount , filteredExpenses}) => 
             updatedExpense={updatedValue}
             handleExpenseAmount={handleExpenseAmount}
           />
-          <DeleteModal deleteToggle={deleteToggle} setDeleteToggle={setDeleteToggle} updatedExpense={updatedValue} deleteItem={deleteItem} />
+          <DeleteModal
+            deleteToggle={deleteToggle}
+            setDeleteToggle={setDeleteToggle}
+            updatedExpense={updatedValue}
+            deleteItem={deleteItem}
+          />
         </>
       ) : (
         <h1 style={{ textAlign: "center", marginTop: "25px", color: "red" }}>
           No expenses available
         </h1>
       )}
-
     </>
   );
 };

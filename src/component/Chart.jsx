@@ -19,62 +19,65 @@ import {
     Title,
     Tooltip,
     Legend
-  );
+  ); 
 
 
 const Chart = ({ filteredExpenses }) => {
 
     console.log(filteredExpenses)
 
-   const [food, setFood] = useState(null)
-    const [travel, setTravel] = useState(null)
-    const [health, setHealth] = useState(null)
-    const [groceries, setGroceries] = useState(null)
+  // const[date, setDate] = useState()
 
-   useEffect(() => {
-        let foodTotalAmount = filteredExpenses.filter((expense) => expense.category === "food").reduce(
-            (accumulator, currentValue) => accumulator + currentValue.amount,0,)
-        setFood(foodTotalAmount)
-
-        let travelTotalAmount = filteredExpenses.filter((expense) => expense.category === "travel").reduce((acc,travelItem) => acc + travelItem.amount, 0,)
-        setTravel(travelTotalAmount)
-
-        let groceriesTotalAmount = filteredExpenses.filter((expense) => expense.category === "groceries").reduce((acc, groceriesItem) => acc + groceriesItem.amount, 0)
-        setGroceries(groceriesTotalAmount)
-
-        let healthTotalAmount = filteredExpenses.filter((expense) => expense.category === "health").reduce((acc, healthItem) => acc + healthItem.amount, 0)
-        setHealth(healthTotalAmount)
-   }, [filteredExpenses])
-    
+  //  useEffect(() => {
+  //  }, [filteredExpenses])
+  
    const dates = filteredExpenses
    .map((expense) => expense.date)
-   .filter((value, index, self) => self.indexOf(value) === index);
-
+    // setDate(dates)
+    
+  
+    const amount = filteredExpenses
+    .map((expense) => expense.amount)
+  
+  
+    const labels = dates;
     const data = {
-        labels: dates,
-        datasets: [
-          {
-            label: "Monthly Enpense",
-            data: [food ,health, groceries, travel],
-            backgroundColor: "rgba(75, 192, 192, 0.6)",
-          },
+      labels: labels,
+      datasets: [{
+        label: 'Expense Line Chart',
+        data: amount,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
         ],
-      };
+        borderColor: [
+          'rgb(153, 102, 255)',
+        ],
+        borderWidth: 1
+      }]
+    };
+    
+   
+
+    // const data = {
+    //     labels: dates,
+    //     datasets: [
+    //       {
+    //         label: "Monthly Enpense",
+    //         data: dates,
+    //         backgroundColor: "rgba(75, 192, 192, 0.6)",
+    //       },
+    //     ],
+    //   };
     
       const options = {
-        responsive: true,
-        plugins: {
-          legend: { position: "top" },
-          title: { display: true, text: "Expense Data" },
-        },
-        scales: {
-          y: {
-            ticks: {
-              stepSize: 500, 
-              callback: (value) => value 
-                },
-                 max: 3000,
-          },
+        type: 'bar',
+        data: data,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
         },
       };
     
