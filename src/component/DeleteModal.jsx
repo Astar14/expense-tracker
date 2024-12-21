@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FaExclamationCircle } from "react-icons/fa";
 
 const DeleteModal = ({
   deleteToggle,
@@ -22,6 +23,7 @@ const DeleteModal = ({
             onClick={() => setDeleteToggle(!deleteToggle)}
           ></div>
           <div className="delete-container">
+          <FaExclamationCircle className="exclamation"/>
             <h2>Are you sure you want to delete</h2>
             <div className="border"></div>
             <button

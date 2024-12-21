@@ -1,7 +1,11 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  font-family: "Arimo", serif;
 }
 
 body {
@@ -354,7 +358,7 @@ select {
   background-color: #f1eeee;
   position: absolute;
   left: 50%;
-  top: 60%;
+  top: 90%;
   transform: translate(-50%, -50%);
   z-index: 1000;
 
@@ -373,22 +377,34 @@ select {
   cursor: pointer;
   border: 1px solid blue;
   background-color: #f1eeee;
-  font-size: 16px;
+  background-color: #5C6AFF;
+  color: white;
+  font-size: 18px;
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 15px;
 }
 
 .delete-container .delete-btn {
   padding: 6px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   margin-top: 10px;
   margin-bottom: 10px;
   background-color: red;
   margin-left: 10px;
   border: none;
+  position: absolute;
+  right: 15px;
+  color: white;
 }
-
+.exclamation{
+  font-size: 150px;
+  color: #5C6AFF;
+  position: relative;
+  left: 50%;
+  translate : -50% 0px;
+}
 .chart-container {
   display: flex;
   justify-content: space-evenly;
