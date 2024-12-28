@@ -57,7 +57,7 @@ function App() {
         expenseAmount={expenseAmount}
         filteredExpenses={filteredExpenses}
         setExpenseAmount={setExpenseAmount}
-        setActiveButton={setActiveButton}
+        setActiveButton={setActiveButton}    
       />
     </>
   );
